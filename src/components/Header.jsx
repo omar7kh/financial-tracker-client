@@ -18,7 +18,7 @@ const Header = () => {
           to='/'
           className='font-bold text-lg text-primary tracking-tighter md:text-2xl'
         >
-          Finance Tracker
+          Financial Tracker
         </Link>
 
         <div className='hidden md:block'>
