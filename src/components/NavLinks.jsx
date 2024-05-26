@@ -24,14 +24,14 @@ export const IsLoggedInLinks = ({ userInfo }) => {
       <Separator className='my-1' />
 
       <div className='flex flex-col justify-start text-sm'>
-        <Link to='/financial'>
-          <Button variant='ghost' className='w-full'>
-            Transactions
-          </Button>
-        </Link>
         <Link to='/'>
           <Button variant='ghost' className='w-full'>
             Home
+          </Button>
+        </Link>
+        <Link to='/financial'>
+          <Button variant='ghost' className='w-full'>
+            Transactions
           </Button>
         </Link>
         <Link to='/profile'>

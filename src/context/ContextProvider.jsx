@@ -9,6 +9,8 @@ export const ContextProvider = ({ children }) => {
     category: '',
     date: '',
   });
+  const [isPopUp, setIsPopUp] = useState(false);
+  const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
 
   return (
     <Context.Provider
@@ -17,6 +19,10 @@ export const ContextProvider = ({ children }) => {
         setTransaction,
         isEdit,
         setIsEdit,
+        isPopUp,
+        setIsPopUp,
+        isDeleteConfirm,
+        setIsDeleteConfirm,
       }}
     >
       {children}

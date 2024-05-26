@@ -18,8 +18,6 @@ const ProfilePage = () => {
 
   const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
 
-  console.log('userInfo', userInfo);
-
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
@@ -35,6 +33,12 @@ const ProfilePage = () => {
       !userData.newPassword
     ) {
       setErrorMessage('Please fill in at least one field.');
+      return;
+    } else if (userData.currentPassword && !userData.newPassword) {
+      setErrorMessage('New Password is required');
+      return;
+    } else if (userData.newPassword && !userData.currentPassword) {
+      setErrorMessage('Current Password is required');
       return;
     }
 
@@ -62,14 +66,14 @@ const ProfilePage = () => {
       </div>
 
       <form
-        className='w-5/6 md:w-3/6 xl:w-[500px] shadow-md border py-10 px-5 rounded-xl'
+        className='w-5/6 md:w-3/6 xl:w-[500px] shadow-md border py-10 px-5 rounded-xl bg-background'
         onSubmit={handleSubmit}
       >
         <div className='flex gap-2'>
           <div key='firstName' className='relative'>
             <label htmlFor='firstName'>First Name</label>
             <input
-              className='w-full rounded-md border-2 border-borderPrimary p-2 mb-3 text-primary dark:text-primary-foreground'
+              className='w-full rounded-md border-2 p-2 mb-3 text-primary dark:text-primary-foreground'
               type='text'
               id='firstName'
               name='firstName'
@@ -81,7 +85,7 @@ const ProfilePage = () => {
           <div key='lastName' className='relative'>
             <label htmlFor='lastName'>Last Name</label>
             <input
-              className='w-full rounded-md border-2 border-borderPrimary p-2 mb-3 text-primary dark:text-primary-foreground'
+              className='w-full rounded-md border-2 p-2 mb-3 text-primary dark:text-primary-foreground'
               type='text'
               id='lastName'
               name='lastName'
@@ -94,7 +98,7 @@ const ProfilePage = () => {
         <div key='email' className='relative'>
           <label htmlFor='email'>E-Mail</label>
           <input
-            className='w-full rounded-md border-2 border-borderPrimary p-2 mb-3 text-primary dark:text-primary-foreground'
+            className='w-full rounded-md border-2 p-2 mb-3 text-primary dark:text-primary-foreground'
             type='email'
             id='email'
             name='email'
@@ -106,7 +110,7 @@ const ProfilePage = () => {
         <div key='currentPassword' className='relative'>
           <label htmlFor='currentPassword'>Current Password</label>
           <input
-            className='w-full rounded-md border-2 border-borderPrimary p-2 mb-3 text-primary dark:text-primary-foreground'
+            className='w-full rounded-md border-2 p-2 mb-3 text-primary dark:text-primary-foreground'
             type={showPassword ? 'text' : 'password'}
             id='currentPassword'
             name='currentPassword'
@@ -129,7 +133,7 @@ const ProfilePage = () => {
         <div key='newPassword' className='relative'>
           <label htmlFor='newPassword'>New Password</label>
           <input
-            className='w-full rounded-md border-2 border-borderPrimary p-2 mb-3 text-primary dark:text-primary-foreground'
+            className='w-full rounded-md border-2 p-2 mb-3 text-primary dark:text-primary-foreground'
             type={showPassword ? 'text' : 'password'}
             id='newPassword'
             name='newPassword'

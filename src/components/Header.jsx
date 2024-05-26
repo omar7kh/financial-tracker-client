@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import MainNav from './MainNav';
 import MobileNav from './MobileNav';
 import { useEffect, useState } from 'react';
-import { useLogoutUser } from '@/api/userApi';
 
 const Header = () => {
   const [userInfo, setUserInfo] = useState();
@@ -12,7 +11,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className='sticky top-0 py-6 shadow w-full bg-background z-50'>
+    <header className='sticky top-0 py-6 shadow w-full dark:bg-black z-50'>
       <div className='container flex justify-between items-center'>
         <Link
           to='/'

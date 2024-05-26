@@ -38,7 +38,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
   }, [transaction]);
 
   return (
-    <div className='border border-border p-5 rounded-md shadow-md flex flex-col justify-between gap-5'>
+    <div className='border border-border p-5 rounded-md shadow-md flex flex-col justify-between gap-5 bg-background'>
       <h2 className='font-bold tracking-tight'>Set new Transaction</h2>
 
       <form

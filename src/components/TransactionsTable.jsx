@@ -22,12 +22,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { columns } from '../config/tableColumns';
 import { CSVLink } from 'react-csv';
+import { Context } from '@/context/ContextProvider';
 
-const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
+const TransactionsTable = ({ transactions, deleteTransaction }) => {
+  const { setIsPopUp, isDeleteConfirm } = useContext(Context);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -73,16 +75,35 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
     table
       .getRowModel()
       .rows.filter((row) => row.getIsSelected())
-      .map((row) => selectedRowsArray.push(row.original));
+      .map((row) => {
+        const date = new Date(row.original.date);
+        return selectedRowsArray.push({
+          nr: row.id,
+          amount: row.original.amount,
+          category: row.original.category,
+          date: date.toLocaleDateString('de-DE', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }),
+        });
+      });
 
     return selectedRowsArray;
   };
 
   const handleDeleteTransactions = () => {
-    const selectedData = getSelectedData();
-    const ids = selectedData.map((row) => row._id);
-    deleteTransaction(ids);
+    setIsPopUp(true);
   };
+
+  useEffect(() => {
+    if (isDeleteConfirm) {
+      const selectedData = getSelectedData();
+      const ids = selectedData.map((row) => row._id);
+      deleteTransaction(ids);
+      setIsPopUp(false);
+    }
+  }, [isDeleteConfirm]);
 
   return (
     <>
@@ -140,7 +161,7 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
         </div>
       </div>
 
-      <div className='rounded-md border border-border shadow-md'>
+      <div className='rounded-md border border-border shadow-md bg-background'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
