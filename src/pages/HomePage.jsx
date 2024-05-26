@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 const HomePage = () => {
   const theme = localStorage.getItem('vite-ui-theme');
   return (
-    <div className='flex flex-col gap-20 justify-center items-center'>
-      <div className='lg:h-[500px] rounded-xl bg-foreground text-primary-foreground flex flex-col justify-center p-10 gap-4 xl:gap-10'>
+    <div className='flex flex-col gap-10 justify-center items-center'>
+      <div className='rounded-md bg-primary text-primary-foreground flex flex-col justify-center p-10 gap-4 xl:gap-10'>
         <p className='text-2xl font-bold capitalize w-fit lg:text-4xl xxl:text-6xl'>
           Take Control of Your Finances with Ease
         </p>
-        <p className='text-sm lg:text-xl lg:max-w-[80%]'>
+        <p className='text-sm lg:text-xl'>
           Track, manage, and optimize your finances effortlessly with our
           powerful and intuitive finance tracker. From budgeting to investments,
           our comprehensive tools help you stay on top of your financial goals.
@@ -26,18 +26,42 @@ const HomePage = () => {
         </Link>
       </div>
 
-      <div className='flex flex-col gap-10 md:w-[80%]'>
-        <img
-          src={transactionsImg}
-          alt='finance image'
-          className='rounded-xl border p-1 shadow-md'
-        />
+      <div className='flex flex-col gap-10 justify-between items-center w-full'>
+        <div className='flex flex-col md:flex-row items-center gap-5 rounded-md bg-primary p-5'>
+          <div className='text-primary-foreground'>
+            <p className='text-2xl mb-2 font-bold capitalize w-fit lg:text-4xl xxl:text-6xl'>
+              Table
+            </p>
+            <p className='text-sm lg:text-xl'>
+              Improve and manage your transactions easily. Download them as CSV
+              and sort them with just a few clicks
+            </p>
+          </div>
 
-        <img
-          src={chartImg}
-          alt='chart image'
-          className='rounded-xl border shadow-md'
-        />
+          <img
+            src={transactionsImg}
+            alt='finance image'
+            className='w-full md:w-[65%] h-full object-contain'
+          />
+        </div>
+
+        <div className='flex flex-col md:flex-row-reverse items-center gap-5 rounded-md bg-primary p-5'>
+          <div className='text-primary-foreground'>
+            <p className='text-2xl mb-2 font-bold capitalize w-fit lg:text-4xl xxl:text-6xl'>
+              Chart
+            </p>
+            <p className='text-sm lg:text-xl'>
+              The chart enables you to easily monitor and organize your
+              transactions
+            </p>
+          </div>
+
+          <img
+            src={chartImg}
+            alt='chart image'
+            className='w-full md:w-[65%] h-full object-contain'
+          />
+        </div>
       </div>
     </div>
   );
