@@ -106,7 +106,9 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
           )}
         </div>
       </form>
-      {errorMessage && <div className='text-red-500'>{errorMessage}</div>}
+      {errorMessage && (
+        <div className='text-red-500 text-sm'>{errorMessage}</div>
+      )}
     </div>
   );
 };

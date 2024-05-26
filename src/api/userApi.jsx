@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 
 const API_URL = import.meta.env.VITE_SERVER_URL;
 
+// CREATE USER
 export const useCreateUser = () => {
   const createUserRequest = async (userFormData) => {
     const response = await axios.post(
@@ -13,8 +14,11 @@ export const useCreateUser = () => {
     );
 
     if (response.status !== 201) {
+      console.log(response.data);
+
       throw new Error('Failed to create User');
     }
+
     return response.data;
   };
 
@@ -22,6 +26,8 @@ export const useCreateUser = () => {
     mutateAsync: createUser,
     isLoading,
     isSuccess,
+    isError,
+    error,
   } = useMutation(createUserRequest, {
     onSuccess: () => {
       toast.success('User created successfully');
@@ -31,9 +37,10 @@ export const useCreateUser = () => {
     },
   });
 
-  return { createUser, isLoading, isSuccess };
+  return { createUser, isLoading, isSuccess, isError, error };
 };
 
+// LOGIN USER
 export const useLoginUser = () => {
   const createLoginRequest = async (userFormData) => {
     const response = await axios.post(
@@ -45,7 +52,6 @@ export const useLoginUser = () => {
     if (response.status !== 200) {
       throw new Error('Failed to Login');
     }
-    console.log('loggedUser', response.data);
 
     localStorage.setItem('UserInfo', JSON.stringify(response.data));
 
@@ -56,20 +62,21 @@ export const useLoginUser = () => {
     mutateAsync: LoginUser,
     isLoading,
     isSuccess,
-    reset,
+    isError,
+    error,
   } = useMutation(createLoginRequest, {
     onSuccess: () => {
-      toast.success('User Logged in successfully');
+      toast.success('Logged in successfully');
     },
     onError: () => {
       toast.error('Failed to Login');
-      reset();
     },
   });
 
-  return { LoginUser, isLoading, isSuccess };
+  return { LoginUser, isLoading, isSuccess, isError, error };
 };
 
+// UPDATE USER
 export const useUpdateUser = () => {
   const updateUserRequest = async (userFormData) => {
     const response = await axios.put(`${API_URL}/api/user`, userFormData, {
@@ -101,4 +108,38 @@ export const useUpdateUser = () => {
   });
 
   return { updatedUser, isLoading };
+};
+
+// LOGOUT USER
+export const useLogoutUser = () => {
+  const logoutUserRequest = async () => {
+    const response = await axios.post(
+      `${API_URL}/api/user/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response.status !== 200) {
+      throw new Error('Failed to Logout');
+    }
+
+    return response.data;
+  };
+
+  const {
+    mutate: logoutUser,
+    isLoading,
+    isSuccess,
+  } = useMutation(logoutUserRequest, {
+    onSuccess: () => {
+      toast.success('Logged out');
+    },
+    onError: () => {
+      toast.error('Failed to Logout');
+    },
+  });
+
+  return { logoutUser, isLoading, isSuccess };
 };

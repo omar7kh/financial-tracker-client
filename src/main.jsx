@@ -4,8 +4,8 @@ import './index.css';
 import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RouterProvider } from 'react-router-dom';
-import router from './AppRoutes';
 import { ContextProvider } from './context/ContextProvider';
+import router from './utils/AppRoutes';
 
 const queryClient = new QueryClient({
   defaultOptions: {

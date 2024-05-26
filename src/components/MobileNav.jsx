@@ -9,9 +9,7 @@ import { Menu } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { IsLoggedInLinks, NotLoggedInLinks } from './NavLinks';
 
-const MobileNav = () => {
-  const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
-
+const MobileNav = ({ userInfo }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>

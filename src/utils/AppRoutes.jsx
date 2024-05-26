@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Layout from './layout/Layout';
-import PageNotFound from './pages/PageNotFound';
-import FinancialPage from './pages/financialPage';
-import LogIn from './pages/auth/LogIn';
-import SignUp from './pages/auth/SignUp';
-import HomePage from './pages/HomePage';
-import ProtectedRoute from './Auth/ProtectedRoute';
-import ProfilePage from './pages/ProfilePage';
+import FinancialPage from '@/pages/financialPage';
+import LogIn from '@/pages/auth/LogIn';
+import SignUp from '@/pages/auth/SignUp';
+import ProtectedRoute from '@/auth/ProtectedRoute';
+import ProfilePage from '@/pages/ProfilePage';
+import Layout from '@/layout/Layout';
+import PageNotFound from '@/pages/PageNotFound';
+import HomePage from '@/pages/HomePage';
 
 const router = createBrowserRouter([
   {

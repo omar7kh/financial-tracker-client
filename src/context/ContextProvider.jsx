@@ -4,7 +4,6 @@ export const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isEdit, setIsEdit] = useState(false);
-
   const [transaction, setTransaction] = useState({
     amount: '',
     category: '',

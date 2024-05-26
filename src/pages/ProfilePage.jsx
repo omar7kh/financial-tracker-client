@@ -18,6 +18,8 @@ const ProfilePage = () => {
 
   const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
 
+  console.log('userInfo', userInfo);
+
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };

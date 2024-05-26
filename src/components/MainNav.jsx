@@ -6,9 +6,7 @@ import {
 } from './ui/dropdown-menu';
 import { IsLoggedInLinks, NotLoggedInLinks } from './NavLinks';
 
-const MainNav = () => {
-  const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
-
+const MainNav = ({ userInfo }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='outline-none flex justify-center items-center'>

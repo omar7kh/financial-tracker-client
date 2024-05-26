@@ -11,7 +11,7 @@ import TransactionCard from './TransactionCard';
 import Spinner from './Spinner';
 import { useContext } from 'react';
 import { Context } from '@/context/ContextProvider';
-import ChartsContainer from './Charts/ChartsContainer';
+import ChartsContainer from './charts/ChartsContainer';
 
 const Transaction = () => {
   const { isEdit, setIsEdit } = useContext(Context);

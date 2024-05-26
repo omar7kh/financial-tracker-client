@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 const API_URL = import.meta.env.VITE_SERVER_URL;
 const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
 
-// Get Transactions
+// GET TRANSACTIONS
 export const useGetTransactions = () => {
   const getTransactionsRequest = async () => {
     const response = await axios.get(`${API_URL}/api/transaction`, {
@@ -26,7 +26,7 @@ export const useGetTransactions = () => {
   return { transactions, isLoading };
 };
 
-// Create Transaction
+// CREATE TRANSACTIONS
 export const useCreateTransaction = () => {
   const queryClient = useQueryClient();
 
@@ -59,7 +59,7 @@ export const useCreateTransaction = () => {
   return { createTransaction, isLoading };
 };
 
-// Delete Transaction
+// DELETE TRANSACTIONS
 export const useDeleteTransaction = () => {
   const queryClient = useQueryClient();
 
@@ -91,7 +91,7 @@ export const useDeleteTransaction = () => {
   return { deleteTransaction, isLoading };
 };
 
-// Update Transaction
+// UPDATE TRANSACTIONS
 export const useUpdateTransaction = () => {
   const queryClient = useQueryClient();
 

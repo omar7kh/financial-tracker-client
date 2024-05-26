@@ -1,13 +1,18 @@
 import { Separator } from './ui/separator';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
-import Cookies from 'js-cookie';
+import { useLogoutUser } from '@/api/userApi';
+import Spinner from './Spinner';
 
 export const IsLoggedInLinks = ({ userInfo }) => {
+  const { logoutUser, isLoading } = useLogoutUser();
+
   const navigate = useNavigate();
 
+  if (isLoading) return <Spinner />;
+
   const handleLogout = () => {
-    Cookies.remove('JWTInfo');
+    logoutUser();
     localStorage.removeItem('UserInfo');
     navigate('/');
   };
@@ -19,14 +24,19 @@ export const IsLoggedInLinks = ({ userInfo }) => {
       <Separator className='my-1' />
 
       <div className='flex flex-col justify-start text-sm'>
-        <Link to='/profile'>
-          <Button variant='ghost' className='w-full'>
-            Profile
-          </Button>
-        </Link>
         <Link to='/financial'>
           <Button variant='ghost' className='w-full'>
             Transactions
+          </Button>
+        </Link>
+        <Link to='/'>
+          <Button variant='ghost' className='w-full'>
+            Home
+          </Button>
+        </Link>
+        <Link to='/profile'>
+          <Button variant='ghost' className='w-full'>
+            Profile
           </Button>
         </Link>
         <Button variant='ghost' onClick={handleLogout}>
@@ -37,7 +47,7 @@ export const IsLoggedInLinks = ({ userInfo }) => {
   );
 };
 
-export const NotLoggedInLinks = ({ loginWithRedirect }) => {
+export const NotLoggedInLinks = () => {
   return (
     <>
       <Link to='/login'>
