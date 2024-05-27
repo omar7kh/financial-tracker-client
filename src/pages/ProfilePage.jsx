@@ -1,8 +1,9 @@
 import { useUpdateUser } from '@/api/userApi';
 import LoadingButton from '@/components/LoadingButton';
 import { Button } from '@/components/ui/button';
-import { Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, Eye, EyeOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { updatedUser, isLoading } = useUpdateUser();
@@ -59,10 +60,13 @@ const ProfilePage = () => {
   }, [userData]);
 
   return (
-    <div className='min-h-[600px] w-full flex flex-col justify-center items-center'>
-      <div className='w-5/6 md:w-3/6 xl:w-[500px] mb-5'>
+    <div className='min-h-[600px] flex flex-col justify-center items-center '>
+      <div className='w-5/6 md:w-3/6 xl:w-[500px] mb-5 relative'>
         <h2 className='font-bold text-2xl'>Profile</h2>
         <h4>view and change your Data</h4>
+        <Link to='/financial' className='absolute -left-10 md:-left-14 top-0'>
+          <ArrowLeft className='h-9 w-9' />
+        </Link>
       </div>
 
       <form

@@ -1,13 +1,21 @@
-import { Link } from 'react-router-dom';
-import transactionsImgLight from '../assets/images/transaction-light.png';
-import transactionsImgDark from '../assets/images/transaction-dark.png';
-import chartImgLight from '../assets/images/chart-light.png';
-import chartImgDark from '../assets/images/chart-dark.png';
+import { Link, useNavigate } from 'react-router-dom';
+import transactionsImg from '../assets/images/transactionImg.png';
+import chartImg from '../assets/images/chartImg.png';
 
 import { Button } from '@/components/ui/button';
+import { useEffect } from 'react';
 
 const HomePage = () => {
-  const theme = localStorage.getItem('vite-ui-theme');
+  const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/financial');
+    }
+  }, []);
+
+  if (userInfo) return;
 
   return (
     <div className='flex flex-col gap-10 justify-center items-center'>
@@ -40,7 +48,7 @@ const HomePage = () => {
           </div>
 
           <img
-            src={theme === 'dark' ? transactionsImgDark : transactionsImgLight}
+            src={transactionsImg}
             alt='finance image'
             className='w-full md:w-[65%] h-full object-contain'
           />
@@ -58,7 +66,7 @@ const HomePage = () => {
           </div>
 
           <img
-            src={theme === 'dark' ? chartImgDark : chartImgLight}
+            src={chartImg}
             alt='chart image'
             className='w-full md:w-[65%] h-full object-contain'
           />

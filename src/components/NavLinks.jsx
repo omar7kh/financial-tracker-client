@@ -8,13 +8,13 @@ export const IsLoggedInLinks = ({ userInfo }) => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return;
-
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logoutUser();
     localStorage.removeItem('UserInfo');
     navigate('/');
   };
+
+  if (isLoading) return;
 
   return (
     <>
@@ -23,11 +23,6 @@ export const IsLoggedInLinks = ({ userInfo }) => {
       <Separator className='my-1' />
 
       <div className='flex flex-col justify-start text-sm'>
-        <Link to='/'>
-          <Button variant='ghost' className='w-full'>
-            Home
-          </Button>
-        </Link>
         <Link to='/financial'>
           <Button variant='ghost' className='w-full'>
             Transactions

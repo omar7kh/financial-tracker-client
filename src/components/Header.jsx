@@ -1,14 +1,10 @@
 import { Link } from 'react-router-dom';
 import MainNav from './MainNav';
 import MobileNav from './MobileNav';
-import { useEffect, useState } from 'react';
+import ThemeToggle from '@/theme/ThemeToggle';
 
 const Header = () => {
-  const [userInfo, setUserInfo] = useState();
-
-  useEffect(() => {
-    setUserInfo(JSON.parse(localStorage.getItem('UserInfo')));
-  }, []);
+  const userInfo = JSON.parse(localStorage.getItem('UserInfo'));
 
   return (
     <header className='sticky top-0 py-6 shadow w-full bg-background dark:bg-black z-50'>
@@ -20,11 +16,15 @@ const Header = () => {
           Financial Tracker
         </Link>
 
-        <div className='hidden md:block'>
-          <MainNav userInfo={userInfo} />
-        </div>
-        <div className='md:hidden'>
-          <MobileNav userInfo={userInfo} />
+        <div className='flex gap-2'>
+          <ThemeToggle />
+
+          <div className='hidden md:block'>
+            <MainNav userInfo={userInfo} />
+          </div>
+          <div className='md:hidden flex justify-center items-center'>
+            <MobileNav userInfo={userInfo} />
+          </div>
         </div>
       </div>
     </header>

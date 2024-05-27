@@ -37,6 +37,7 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
     setIsDeleteConfirm,
     setTransaction,
     setIsEdit,
+    setPopUpText,
   } = useContext(Context);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -110,11 +111,13 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
 
   const handleDeleteTransactions = () => {
     setIsPopUp(true);
+    setPopUpText(`( ${getSelectedData().length} Transactions )`);
   };
 
-  const handleDeleteIndividual = (rowId) => {
-    setRowToDelete(rowId);
+  const handleDeleteIndividual = (row) => {
+    setRowToDelete(row._id);
     setIsPopUp(true);
+    setPopUpText(`( ${row.category} ${row.amount} )`);
   };
 
   useEffect(() => {
@@ -246,7 +249,7 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
                               </DropdownMenuItem>
                               <DropdownMenuItem
                                 onClick={() =>
-                                  handleDeleteIndividual(row.original._id)
+                                  handleDeleteIndividual(row.original)
                                 }
                               >
                                 Delete

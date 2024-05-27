@@ -11,6 +11,7 @@ export const ContextProvider = ({ children }) => {
   });
   const [isPopUp, setIsPopUp] = useState(false);
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
+  const [popUpText, setPopUpText] = useState('');
 
   return (
     <Context.Provider
@@ -23,6 +24,8 @@ export const ContextProvider = ({ children }) => {
         setIsPopUp,
         isDeleteConfirm,
         setIsDeleteConfirm,
+        popUpText,
+        setPopUpText,
       }}
     >
       {children}

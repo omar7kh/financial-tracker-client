@@ -13,7 +13,10 @@ const MobileNav = ({ userInfo }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Menu className='text-primary cursor-pointer' aria-label='Main Menu' />
+        <Menu
+          className='text-primary cursor-pointer w-8 h-8'
+          aria-label='Main Menu'
+        />
       </SheetTrigger>
 
       <SheetContent className='space-y-3'>

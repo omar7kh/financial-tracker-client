@@ -23,27 +23,14 @@ const Transaction = () => {
   const { updateTransaction, isLoading: isUpdateLoading } =
     useUpdateTransaction();
 
-  if (isGetLoading) {
-    return (
-      <div className='h-screen flex justify-center items-center'>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!transactions) {
-    return <span>Unable to get transactions</span>;
-  }
+  if (isGetLoading) return;
 
   return (
     <Tabs defaultValue='transactions'>
-      <div className='flex justify-between'>
-        <TabsList>
-          <TabsTrigger value='transactions'>Transactions</TabsTrigger>
-          <TabsTrigger value='charts'>Chart</TabsTrigger>
-        </TabsList>
-        <ThemeToggle />
-      </div>
+      <TabsList>
+        <TabsTrigger value='transactions'>Transactions</TabsTrigger>
+        <TabsTrigger value='charts'>Chart</TabsTrigger>
+      </TabsList>
 
       <TabsContent value='transactions' className='space-y-5'>
         <TransactionCard
