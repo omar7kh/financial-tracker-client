@@ -1,16 +1,6 @@
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ArrowDownUp, Ellipsis } from 'lucide-react';
+import { ArrowDownUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useContext } from 'react';
-import { Context } from '@/context/ContextProvider';
-import Spinner from '@/components/Spinner';
-import { useDeleteTransaction } from '@/api/transactionsApi';
 
 export const columns = [
   {
