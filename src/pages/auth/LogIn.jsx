@@ -9,6 +9,14 @@ const LogIn = () => {
   const { LoginUser, isLoading, isSuccess, isError, error } = useLoginUser();
   const [showPassword, setShowPassword] = useState(false);
   const [unauthorizedError, setUnauthorizedError] = useState('');
+  const [exceedingLimitTimer, setExceedingLimitTimer] = useState(() => {
+    const savedTimer = localStorage.getItem('exceedingLimitTimer');
+    return savedTimer ? parseInt(savedTimer, 10) : 0;
+  });
+  const [exceedingLimitMessage, setExceedingLimitMessage] = useState(() => {
+    const savedMessage = localStorage.getItem('exceedingLimitMessage');
+    return savedMessage || '';
+  });
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -33,13 +41,13 @@ const LogIn = () => {
       email: '',
       password: '',
     });
-    setErrorMessage('');
   };
 
   useEffect(() => {
     if (isError) {
       const validationErrors = error.response.data.errors;
       const unauthorizedError = error.response.data.message;
+      const exceedingLimitError = error.response.data;
 
       if (unauthorizedError) {
         setUnauthorizedError(unauthorizedError);
@@ -50,15 +58,43 @@ const LogIn = () => {
           newErrorMessage[err.path] = err.msg;
         });
         setErrorMessage(newErrorMessage);
+      } else if (exceedingLimitError) {
+        setUnauthorizedError('');
+        setExceedingLimitMessage(exceedingLimitError);
+        setExceedingLimitTimer(60);
+        localStorage.setItem('exceedingLimitTimer', 60);
+        localStorage.setItem('exceedingLimitMessage', exceedingLimitError);
       }
     }
-  }, [isError, error]);
+  }, [isError, error, errorMessage]);
 
   useEffect(() => {
     if (isSuccess) {
       navigate('/financial');
     }
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    let timer;
+
+    if (exceedingLimitTimer > 0) {
+      timer = setInterval(() => {
+        setExceedingLimitTimer((prevTime) => {
+          const newTime = prevTime - 1;
+          localStorage.setItem('exceedingLimitTimer', newTime);
+          return newTime;
+        });
+      }, 1000);
+    } else {
+      setExceedingLimitMessage('');
+      localStorage.removeItem('exceedingLimitTimer');
+      localStorage.removeItem('exceedingLimitMessage');
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [exceedingLimitTimer]);
 
   return (
     <section className='min-h-screen w-full'>
@@ -75,9 +111,9 @@ const LogIn = () => {
           <div>
             <label htmlFor='email'>Email</label>
             <input
-              className={`w-full rounded-md border-2  p-2 mb-3 dark:text-primary-foreground ${
+              className={`w-full rounded-md border-2 p-2 mb-3 dark:text-primary-foreground ${
                 errorMessage.email && 'border-red-500'
-              } `}
+              }`}
               type='email'
               id='email'
               name='email'
@@ -94,7 +130,7 @@ const LogIn = () => {
             <input
               className={`w-full rounded-md border-2 p-2 mb-3 pr-10 dark:text-primary-foreground ${
                 errorMessage.password && 'border-red-500'
-              } `}
+              }`}
               type={showPassword ? 'text' : 'password'}
               id='password'
               name='password'
@@ -125,10 +161,20 @@ const LogIn = () => {
             <p className='text-red-500 mb-5 text-sm'>{unauthorizedError}</p>
           )}
 
+          {exceedingLimitTimer > 0 && exceedingLimitMessage && (
+            <p className='text-red-500 mb-5 text-sm'>
+              {exceedingLimitMessage.split('1 minute')[0]} {exceedingLimitTimer}
+            </p>
+          )}
+
           {isLoading ? (
             <LoadingButton />
           ) : (
-            <Button className='w-full' type='submit'>
+            <Button
+              className='w-full'
+              type='submit'
+              disabled={exceedingLimitTimer > 0 && exceedingLimitMessage}
+            >
               Log In
             </Button>
           )}

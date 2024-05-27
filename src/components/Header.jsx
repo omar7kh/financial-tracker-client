@@ -11,7 +11,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className='sticky top-0 py-6 shadow w-full dark:bg-black z-50'>
+    <header className='sticky top-0 py-6 shadow w-full bg-background dark:bg-black z-50'>
       <div className='container flex justify-between items-center'>
         <Link
           to='/'

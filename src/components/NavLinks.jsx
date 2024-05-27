@@ -2,14 +2,13 @@ import { Separator } from './ui/separator';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { useLogoutUser } from '@/api/userApi';
-import Spinner from './Spinner';
 
 export const IsLoggedInLinks = ({ userInfo }) => {
   const { logoutUser, isLoading } = useLogoutUser();
 
   const navigate = useNavigate();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return;
 
   const handleLogout = () => {
     logoutUser();
