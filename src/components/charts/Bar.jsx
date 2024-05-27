@@ -79,7 +79,7 @@ const BarChart = ({ rawData }) => {
   };
 
   return (
-    <div className='border rounded-md shadow-md dark:bg-gray-800 dark:text-red w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]'>
+    <div className='border rounded-md shadow-md dark:bg-secondary dark:text-red w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]'>
       <Bar options={options} data={userData} />
     </div>
   );

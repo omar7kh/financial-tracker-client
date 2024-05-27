@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider>
-      <div className='flex flex-col min-h-screen bg-background dark:bg-black text-foreground'>
+      <div className='flex flex-col min-h-screen text-foreground'>
         <Header />
         <main className='container flex-1 py-[32px]'>{children}</main>
         {isPopUp && <PopOver />}

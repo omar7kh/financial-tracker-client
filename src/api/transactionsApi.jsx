@@ -64,6 +64,7 @@ export const useDeleteTransaction = () => {
   const queryClient = useQueryClient();
 
   const deleteTransactionRequest = async (ids) => {
+    console.log('ids', ids);
     const response = await axios.delete(`${API_URL}/api/transaction`, {
       data: { ids },
       withCredentials: true,

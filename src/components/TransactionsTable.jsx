@@ -12,6 +12,7 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
@@ -23,17 +24,25 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useContext, useEffect, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Ellipsis } from 'lucide-react';
 import { columns } from '../config/tableColumns';
 import { CSVLink } from 'react-csv';
 import { Context } from '@/context/ContextProvider';
+import Spinner from './Spinner';
 
-const TransactionsTable = ({ transactions, deleteTransaction }) => {
-  const { setIsPopUp, isDeleteConfirm } = useContext(Context);
+const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
+  const {
+    setIsPopUp,
+    isDeleteConfirm,
+    setIsDeleteConfirm,
+    setTransaction,
+    setIsEdit,
+  } = useContext(Context);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
+  const [rowToDelete, setRowToDelete] = useState(null);
 
   const table = useReactTable({
     data: transactions,
@@ -72,12 +81,14 @@ const TransactionsTable = ({ transactions, deleteTransaction }) => {
 
   const getSelectedData = () => {
     const selectedRowsArray = [];
+
     table
       .getRowModel()
       .rows.filter((row) => row.getIsSelected())
       .map((row) => {
         const date = new Date(row.original.date);
         return selectedRowsArray.push({
+          _id: row.original._id,
           nr: row.id,
           amount: row.original.amount,
           category: row.original.category,
@@ -92,16 +103,33 @@ const TransactionsTable = ({ transactions, deleteTransaction }) => {
     return selectedRowsArray;
   };
 
+  const handleEdit = (rowData) => {
+    setTransaction(rowData);
+    setIsEdit(true);
+  };
+
   const handleDeleteTransactions = () => {
+    setIsPopUp(true);
+  };
+
+  const handleDeleteIndividual = (rowId) => {
+    setRowToDelete(rowId);
     setIsPopUp(true);
   };
 
   useEffect(() => {
     if (isDeleteConfirm) {
-      const selectedData = getSelectedData();
-      const ids = selectedData.map((row) => row._id);
-      deleteTransaction(ids);
+      if (rowToDelete !== null) {
+        deleteTransaction(rowToDelete);
+        setRowToDelete(null);
+      } else {
+        const selectedData = getSelectedData();
+        const ids = selectedData.map((row) => row._id);
+        deleteTransaction(ids);
+        setRowSelection({});
+      }
       setIsPopUp(false);
+      setIsDeleteConfirm(false);
     }
   }, [isDeleteConfirm]);
 
@@ -161,7 +189,7 @@ const TransactionsTable = ({ transactions, deleteTransaction }) => {
         </div>
       </div>
 
-      <div className='rounded-md border border-border shadow-md bg-background'>
+      <div className='rounded-md border border-border shadow-md dark:bg-secondary'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -194,6 +222,38 @@ const TransactionsTable = ({ transactions, deleteTransaction }) => {
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
+                      )}
+                      {cell.column.id === 'actions' && (
+                        <div className='text-right mr-5 flex justify-end'>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              {isLoading ? (
+                                <div className='flex justify-center items-center h-8 w-8'>
+                                  <Spinner />
+                                </div>
+                              ) : (
+                                <Button variant='ghost' className='h-8 w-8 p-0'>
+                                  <span className='sr-only'>Open menu</span>
+                                  <Ellipsis />
+                                </Button>
+                              )}
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align='end'>
+                              <DropdownMenuItem
+                                onClick={() => handleEdit(row.original)}
+                              >
+                                Change
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleDeleteIndividual(row.original._id)
+                                }
+                              >
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
                       )}
                     </TableCell>
                   ))}

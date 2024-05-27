@@ -38,7 +38,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
   }, [transaction]);
 
   return (
-    <div className='border border-border p-5 rounded-md shadow-md flex flex-col justify-between gap-5 bg-background'>
+    <div className='border border-border p-5 rounded-md shadow-md flex flex-col justify-between gap-5 dark:bg-secondary'>
       <h2 className='font-bold tracking-tight'>Set new Transaction</h2>
 
       <form
@@ -49,7 +49,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
           <div className='min-w-[150px] flex flex-col space-y-1.5 flex-1'>
             <Label htmlFor='amount'>Amount</Label>
             <Input
-              className='no-arrows'
+              className='no-arrows dark:bg-background'
               id='amount'
               type='number'
               placeholder='add your Amount'
@@ -68,7 +68,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
                 setTransaction({ ...transaction, category: value })
               }
             >
-              <SelectTrigger id='categories'>
+              <SelectTrigger id='categories' className='dark:bg-background'>
                 <SelectValue placeholder='Select' />
               </SelectTrigger>
               <SelectContent position='popper'>
@@ -95,6 +95,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
             type='button'
             onClick={() => {
               setTransaction({ amount: '', category: '', date: '' });
+              setIsEdit(false);
             }}
           >
             reset

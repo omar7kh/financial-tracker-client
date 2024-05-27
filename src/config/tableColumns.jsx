@@ -93,44 +93,6 @@ export const columns = [
   {
     id: 'actions',
     header: () => <div className='text-right mr-6'>Edit</div>,
-    cell: ({ row }) => {
-      const rowData = row.original;
-      const { setTransaction, setIsEdit } = useContext(Context);
-
-      const { deleteTransaction, isLoading } = useDeleteTransaction();
-
-      const handleEdit = () => {
-        setTransaction(rowData);
-        setIsEdit(true);
-      };
-
-      const handleDelete = () => {
-        deleteTransaction(rowData);
-      };
-
-      return (
-        <div className='text-right mr-5 flex justify-end'>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              {isLoading ? (
-                <div className='flex justify-center items-center h-8 w-8'>
-                  <Spinner />
-                </div>
-              ) : (
-                <Button variant='ghost' className='h-8 w-8 p-0'>
-                  <span className='sr-only'>Open menu</span>
-                  <Ellipsis />
-                </Button>
-              )}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuItem onClick={handleEdit}>Change</DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
-    },
     enableHiding: false,
   },
 ];

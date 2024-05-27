@@ -97,7 +97,7 @@ const LogIn = () => {
   }, [exceedingLimitTimer]);
 
   return (
-    <section className='min-h-screen w-full'>
+    <section className='min-h-screen w-full '>
       <div className='h-screen min-h-[600px] flex flex-col justify-center items-center'>
         <Link to='/'>
           <p className='font-bold text-2xl mb-4'>Finance Tracker</p>
