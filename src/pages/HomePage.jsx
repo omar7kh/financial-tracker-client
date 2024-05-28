@@ -31,7 +31,9 @@ const HomePage = () => {
         </p>
 
         <Link to='/signup'>
-          <Button className='w-fit'>SignUp</Button>
+          <Button variant='secondary' className='dark:bg-white dark:text-black'>
+            SignUp
+          </Button>
         </Link>
       </div>
 
