@@ -22,7 +22,7 @@ const DatePicker = ({ setTransaction, transaction }) => {
           id='date'
           variant={'outline'}
           className={cn(
-            'justify-start text-left font-normal',
+            'justify-start text-left font-normal dark:bg-secondary',
             !transaction.date && 'text-muted-foreground'
           )}
         >

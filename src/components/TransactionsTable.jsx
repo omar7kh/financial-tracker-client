@@ -145,7 +145,7 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
           onChange={(event) =>
             table.getColumn('category').setFilterValue(event.target.value)
           }
-          className='md:max-w-sm'
+          className='md:max-w-sm dark:bg-secondary'
         />
 
         <div className='flex gap-2 flex-wrap'>

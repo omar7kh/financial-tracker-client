@@ -77,7 +77,7 @@ const ProfilePage = () => {
           <div key='firstName' className='relative'>
             <label htmlFor='firstName'>First Name</label>
             <input
-              className='w-full rounded-md border-2 p-2 mb-3 dark:bg-background text-primary'
+              className='w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary text-primary'
               type='text'
               id='firstName'
               name='firstName'
@@ -89,7 +89,7 @@ const ProfilePage = () => {
           <div key='lastName' className='relative'>
             <label htmlFor='lastName'>Last Name</label>
             <input
-              className='w-full rounded-md border-2 p-2 mb-3 dark:bg-background text-primary'
+              className='w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary text-primary'
               type='text'
               id='lastName'
               name='lastName'
@@ -102,7 +102,7 @@ const ProfilePage = () => {
         <div key='email' className='relative'>
           <label htmlFor='email'>E-Mail</label>
           <input
-            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-background text-primary'
+            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary text-primary'
             type='email'
             id='email'
             name='email'
@@ -114,7 +114,7 @@ const ProfilePage = () => {
         <div key='currentPassword' className='relative'>
           <label htmlFor='currentPassword'>Current Password</label>
           <input
-            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-background text-primary'
+            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary text-primary'
             type={showPassword ? 'text' : 'password'}
             id='currentPassword'
             name='currentPassword'
@@ -137,7 +137,7 @@ const ProfilePage = () => {
         <div key='newPassword' className='relative'>
           <label htmlFor='newPassword'>New Password</label>
           <input
-            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-background text-primary'
+            className='w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary text-primary'
             type={showPassword ? 'text' : 'password'}
             id='newPassword'
             name='newPassword'

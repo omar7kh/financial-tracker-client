@@ -46,19 +46,19 @@ const BarChart = ({ rawData }) => {
         {
           label: 'Transfer',
           data: transferData,
-          backgroundColor: '#ff8c1a',
+          backgroundColor: '#e67300',
           borderRadius: 5,
         },
         {
           label: 'Income',
           data: incomeData,
-          backgroundColor: '#00b359',
+          backgroundColor: '#008040',
           borderRadius: 5,
         },
         {
           label: 'Expense',
           data: expenseData,
-          backgroundColor: '#e60000',
+          backgroundColor: '#cc0000',
           borderRadius: 5,
         },
         {

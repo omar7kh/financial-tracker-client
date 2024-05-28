@@ -105,13 +105,13 @@ const LogIn = () => {
 
         <form
           onSubmit={handleCreateUser}
-          className='relative w-5/6 md:w-3/6 xl:w-[500px] mx-auto border shadow-md py-10 px-5 rounded-xl'
+          className='relative w-5/6 md:w-3/6 xl:w-[500px] mx-auto border shadow-md py-10 px-5 rounded-xl dark:bg-secondary'
           noValidate
         >
           <div>
             <label htmlFor='email'>Email</label>
             <input
-              className={`w-full rounded-md border-2 p-2 mb-3 dark:text-primary-foreground ${
+              className={`w-full rounded-md border-2 p-2 mb-3 dark:bg-secondary ${
                 errorMessage.email && 'border-red-500'
               }`}
               type='email'
@@ -128,7 +128,7 @@ const LogIn = () => {
           <div className='relative'>
             <label htmlFor='password'>Password</label>
             <input
-              className={`w-full rounded-md border-2 p-2 mb-3 pr-10 dark:text-primary-foreground ${
+              className={`w-full rounded-md border-2 p-2 mb-3 pr-10 dark:bg-secondary ${
                 errorMessage.password && 'border-red-500'
               }`}
               type={showPassword ? 'text' : 'password'}
@@ -140,13 +140,13 @@ const LogIn = () => {
 
             {showPassword ? (
               <EyeOff
-                className='fa-solid fa-eye-slash absolute right-3 top-[34px] cursor-pointer dark:text-primary-foreground'
+                className='fa-solid fa-eye-slash absolute right-3 top-[34px] cursor-pointer text-primary'
                 onClick={() => setShowPassword(!showPassword)}
               />
             ) : (
               <Eye
                 onClick={() => setShowPassword(!showPassword)}
-                className='fa-solid fa-eye-slash absolute right-3 top-[34px] cursor-pointer dark:text-primary-foreground'
+                className='fa-solid fa-eye-slash absolute right-3 top-[34px] cursor-pointer text-primary'
               />
             )}
 

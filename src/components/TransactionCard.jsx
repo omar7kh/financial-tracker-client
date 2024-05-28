@@ -49,7 +49,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
           <div className='min-w-[150px] flex flex-col space-y-1.5 flex-1'>
             <Label htmlFor='amount'>Amount</Label>
             <Input
-              className='no-arrows dark:bg-background'
+              className='no-arrows dark:bg-secondary'
               id='amount'
               type='number'
               placeholder='add your Amount'
@@ -68,7 +68,7 @@ const TransactionCard = ({ onSave, isLoading, submitText }) => {
                 setTransaction({ ...transaction, category: value })
               }
             >
-              <SelectTrigger id='categories' className='dark:bg-background'>
+              <SelectTrigger id='categories' className='dark:bg-secondary'>
                 <SelectValue placeholder='Select' />
               </SelectTrigger>
               <SelectContent position='popper'>
