@@ -31,7 +31,6 @@ const LogIn = () => {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
     setErrorMessage({ ...errorMessage, [e.target.name]: '' });
-    setUnauthorizedError('');
   };
 
   const handleCreateUser = (e) => {
@@ -41,6 +40,7 @@ const LogIn = () => {
       email: '',
       password: '',
     });
+    setUnauthorizedError('');
   };
 
   useEffect(() => {

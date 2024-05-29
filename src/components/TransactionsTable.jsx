@@ -245,7 +245,7 @@ const TransactionsTable = ({ transactions, deleteTransaction, isLoading }) => {
                               <DropdownMenuItem
                                 onClick={() => handleEdit(row.original)}
                               >
-                                Change
+                                Edit
                               </DropdownMenuItem>
                               <DropdownMenuItem
                                 onClick={() =>
