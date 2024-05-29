@@ -99,7 +99,7 @@ export const useUpdateUser = () => {
     reset,
   } = useMutation(updateUserRequest, {
     onSuccess: () => {
-      toast.success('User updated in successfully');
+      toast.success('User updated successfully');
     },
     onError: () => {
       toast.error('Failed to Update User');
