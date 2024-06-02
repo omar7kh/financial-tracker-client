@@ -1,6 +1,6 @@
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useLogoutUser } from '@/api/userApi';
 
 export const IsLoggedInLinks = ({ userInfo }) => {

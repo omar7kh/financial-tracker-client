@@ -3,7 +3,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
+} from '../ui/dropdown-menu';
 import { IsLoggedInLinks, NotLoggedInLinks } from './NavLinks';
 
 const MainNav = ({ userInfo }) => {

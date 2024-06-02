@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import { IsLoggedInLinks, NotLoggedInLinks } from './NavLinks';
 
 const MobileNav = ({ userInfo }) => {
